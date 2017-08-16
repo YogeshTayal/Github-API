@@ -1,0 +1,37 @@
+<form ng-submit="main.fetchData()">
+    <div class="form-group">
+        <label for="org">Organization:</label>
+        <input type="text" class="form-control" id="org" ng-model="main.org" required>
+    </div>
+    <div class="form-group">
+        <label for="repo">Repository:</label>
+        <input type="text" class="form-control" id="repo" ng-model="main.repo" required>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<br>
+<br>
+<div ng-show="main.issues &amp;&amp; main.issues.length">
+    <h2>Data:</h2>
+    <input type="text" ng-model="main.search">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>PR No.</th>
+                <th>Title</th>
+                <th>User</th>
+                <th>Patch URL</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="issue in main.issues | filter:{title: main.search}">
+                <td>{{issue.number}}</td>
+                <td>{{issue.title}}</td>
+                <td>{{issue.user.login}}</td>
+                <td>{{issue.pull_request.patch_url}}</td>
+                <td>{{issue.state}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
